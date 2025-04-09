@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{{ url_for('home') }}" method="post">
+        <div>
+            <h1>Movie Rental Database Dashboard</h1>
+            <p>Welcome to the Sakila rentals dashboard! Use the select box to choose what type of report you would like to view.</p>
+            <label for="report_choice">Choose a report:</label>
+            <select name="report_choice" id="report_choice">
+                <option value=""disabled selected>Choose a Report</option>
+                <option value="rental-reports">Rental Reports</option>
+                <option value="customer-reports">Customer Reports</option>
+                <option value="inventory-reports">Inventory Reports</option>
+            </select>
+        </div>
+        <button type="submit">Go</button>
+    </form>
+    {% if error %}
+        <p class="alert";>{{ error }}</p>
+    {% endif %}
+{% endblock %}

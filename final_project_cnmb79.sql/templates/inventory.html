@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Inventory Reports</h1>
+<form method="POST" action="{{ url_for('inventory_reports') }}">
+    <label for="report_choice">Choose a report:</label>
+    <select id="report_choice" name="report_choice">
+        <option value=""disabled selected>Choose a Report</option>
+        <option value="moviesPerCategory">View movies Per Category </option>
+        <option value="moviesPerCategoryInStock">View movies Per Category In Stock</option>
+    </select>
+    <button type="submit">Generate Report</button>
+</form>
+
+<div id="results">
+    {% if chart %}
+        <h3>{{ chart_title }}</h3>
+        <div>
+            <embed type="image/svg+xml" src="{{ chart }}" />
+        </div>
+    {% else %}
+        <p>No report generated</p>
+    {% endif %}
+
+    {% if table_data %}
+        <h4>Report Data</h4>
+        <table>
+            <thead>
+                <tr>
+                    {% for column in table_data[0].keys() %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table_data %}
+                <tr>
+                    {% for column, value in row.items() %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% if error %}
+        <p class="alert";>{{ error }}</p>
+    {% endif %}
+{% endblock %}

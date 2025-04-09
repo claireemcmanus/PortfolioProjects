@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <title>{% block title %} {% endblock %} - SakilaApp</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #ffd3f0; 
+            color: rgb(0, 0, 0);
+            font-family: Georgia;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+
+        .post {
+            padding: 10px;
+            margin: 5px;
+            background-color: #ee82d8
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #ee82d8; 
+            margin-bottom: 20px; 
+        }
+        
+        nav {
+            font: Georgia;
+            display: flex;
+            justify-content: center;
+            background: #3c3c3c;
+            padding: 1rem 0;
+            }
+        nav a {
+            color: #fc72bc;
+            font-size: 3em;
+            margin-left: 50px;
+            text-decoration: none;
+        }
+
+        .alert {
+            padding: 20px;
+            margin: 5px;
+            color: #970020;
+            background-color: #ffd5de;
+        }
+        .content {
+            padding: 20px; 
+        }
+    </style>
+</head>
+<body>
+    
+        <nav>
+            <a href="{{ url_for('home') }}">Dashboard</a>
+            <a href="{{ url_for('rental_reports') }}">Rental Reports</a>
+            <a href="{{ url_for('customer_reports') }}">Customer Reports</a>
+            <a href="{{ url_for('inventory_reports') }}">Inventory Reports</a>
+        </nav>
+        <hr>
+        <div class="content">
+            {% for message in get_flashed_messages() %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+
+            {% block content %} {% endblock %}
+        </div>
+    
+</body>
+</html>
